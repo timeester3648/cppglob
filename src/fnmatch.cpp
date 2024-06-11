@@ -27,8 +27,10 @@
 #include <filesystem>
 #include <cppglob/fnmatch.hpp>
 
+#include <boost/regex.hpp>
+
 namespace cppglob {
-  using regex_type = std::basic_regex<char_type>;
+  using regex_type = boost::basic_regex<char_type>;
 
   namespace detail {
     CPPGLOB_INLINE regex_type compile_pattern(const string_view_type& pat) {
@@ -80,7 +82,7 @@ namespace cppglob {
     regex_type re =
         detail::compile_pattern(string_view_type(&pat_str[0], pat_str.size()));
     auto filter_fn = [&](std::vector<fs::path>::value_type& p) -> bool {
-      return !std::regex_match(p.lexically_normal().native(), re);
+      return !boost::regex_match(p.lexically_normal().native(), re);
     };
 
     auto result = std::remove_if(names.begin(), names.end(), filter_fn);

@@ -23,6 +23,8 @@ with the -std=c++17 or -std=gnu++17 compiler options.
 #  define CStr(x) x
 #endif
 
+#define CPPGLOB_STATIC
+
 #ifdef CPPGLOB_COVERAGE
 #  define CPPGLOB_EXPORT __attribute__((visibility("default")))
 #  define CPPGLOB_LOCAL
